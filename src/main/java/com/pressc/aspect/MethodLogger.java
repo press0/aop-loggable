@@ -30,7 +30,7 @@ public class MethodLogger {
         return result;
     }
 
-    String args(Object[] objs) {
+    String args(Object... objs) {
         StringBuilder sb = new StringBuilder();
         for (Object o : objs) {
             sb.append("'" + o.toString() + "' ");
