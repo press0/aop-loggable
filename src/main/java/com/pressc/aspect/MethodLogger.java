@@ -4,15 +4,20 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by q on 5/24/15.
  */
 @Aspect
 public class MethodLogger {
+    Logger _log;
+
     @Around("execution(* *(..)) && @annotation(com.pressc.aspect.Loggable)")
     public Object around(ProceedingJoinPoint point) {
         long start = System.currentTimeMillis();
+        _log = LoggerFactory.getLogger(point.getTarget().getClass());
         Object result = null;
         try {
             result = point.proceed();
@@ -26,7 +31,7 @@ public class MethodLogger {
                 result,
                 System.currentTimeMillis() - start
         );
-        System.out.println(s);
+        _log.info(s);
         return result;
     }
 

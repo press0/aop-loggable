@@ -15,6 +15,5 @@
         <property name="person" ref="person"></property>
     </bean>
 
-
     <bean name="personAnnotationAspect" class="com.pressc.aspect.MethodLogger"/>
 </beans>
